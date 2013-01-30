@@ -39,6 +39,7 @@
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -53,10 +54,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ProductSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Aspnet.Mvc.SportStore.Domain\Demo.Aspnet.Mvc.SportStore.Domain.csproj">
+      <Project>{AE3EB31E-DE3C-4A3A-B312-BC563769BE64}</Project>
+      <Name>Demo.Aspnet.Mvc.SportStore.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demo.Aspnet.Mvc.SportStore.WebUI\Demo.Aspnet.Mvc.SportStore.WebUI.csproj">
+      <Project>{3DC13F2A-622F-4435-BE4E-6DDCEA4375B7}</Project>
+      <Name>Demo.Aspnet.Mvc.SportStore.WebUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

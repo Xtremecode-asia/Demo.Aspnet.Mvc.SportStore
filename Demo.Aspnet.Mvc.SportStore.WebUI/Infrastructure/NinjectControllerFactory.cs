@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 using Demo.Aspnet.Mvc.SportStore.Domain.Abstract;
+using Demo.Aspnet.Mvc.SportStore.Domain.Concrete;
 using Demo.Aspnet.Mvc.SportStore.Domain.Entities;
 using Moq;
 using Ninject;
@@ -13,11 +14,10 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Infrastructure
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {
-        private readonly IKernel _ninjectKernel;
+        private readonly IKernel _ninjectKernel = new StandardKernel();
 
         public NinjectControllerFactory()
         {
-            _ninjectKernel = new StandardKernel();
             AddBindings();
         }
 
@@ -28,8 +28,9 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            // TODO: Add bindings here
-            BindProductRepositoryMock();
+            // -- Add bindings here
+            //BindProductRepositoryMock();
+            _ninjectKernel.Bind<IProductRepository>().To<EFProductRepository>();
         }
 
         private void BindProductRepositoryMock()
