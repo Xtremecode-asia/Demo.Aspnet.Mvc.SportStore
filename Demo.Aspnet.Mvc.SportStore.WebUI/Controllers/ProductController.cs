@@ -8,7 +8,7 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
-        private const int PageSize = 4;
+        private const int ItemSizePerPage = 4;
 
         public ProductController( IProductRepository productRepository )
         {
@@ -18,11 +18,11 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
         //
         // GET: /Product/List
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(int pageIndex = 1)
         {
             return View( _productRepository.Products.OrderBy(p=>p.ProductID)
-                                                    .Skip((page-1)*PageSize)
-                                                    .Take(PageSize));
+                                                    .Skip((pageIndex-1)*ItemSizePerPage)
+                                                    .Take(ItemSizePerPage));
         }
 
     }

@@ -1,9 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
+using System.Web.Mvc;
 
 using Demo.Aspnet.Mvc.SportStore.Domain.Abstract;
 using Demo.Aspnet.Mvc.SportStore.Domain.Entities;
 using Demo.Aspnet.Mvc.SportStore.WebUI.Controllers;
+using Demo.Aspnet.Mvc.SportStore.WebUI.HtmlHelpers;
+using Demo.Aspnet.Mvc.SportStore.WebUI.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -40,11 +45,41 @@ namespace Demo.Aspnet.Mvc.SportStore.UnitTests
 
             // Assert
             Product[] actual = productsInPage.ToArray();
-            Assert.AreEqual(2, actual.Length );
-            Assert.AreEqual(5, actual[ 0 ].ProductID );
+            Assert.AreEqual( 2, actual.Length );
+            Assert.AreEqual( 5, actual[ 0 ].ProductID );
             Assert.AreEqual( "P5", actual[ 0 ].Name );
             Assert.AreEqual( 6, actual[ 1 ].ProductID );
             Assert.AreEqual( "P6", actual[ 1 ].Name );
+        }
+
+        public void Can_Generate_Page_Links()
+        {
+            // Arrange - Define HtmlHelper, at the moment we'd just instantiate it from current default type which takes null params on its contructor args
+            HtmlHelper htmlHelper = new HtmlHelper( null, null );
+
+            // Arrange - Expected result
+            StringBuilder expectedBuilder = new StringBuilder();
+            expectedBuilder.Append( string.Format( "<a class=\"{0}\" href=\"{1}\">{2}</a>", "selected", buildPageUrl( 1 ), 1 ) );
+            expectedBuilder.Append( string.Format( "<a href=\"{0}\">{1}</a>", buildPageUrl( 2 ), 2 ) );
+
+            // Arrange - Create paging info 
+            PagingInfo pagingInfo = new PagingInfo { CurrentPageIndex = 1, ItemsPerPage = 2, TotalItems = 4 };
+
+            // Arrange - Setup the pageUrl delegate 
+            Func<int, string> pageUrlDelegate = buildPageUrl;
+
+            // Act:
+            MvcHtmlString result = htmlHelper.PageLinks( pagingInfo, pageUrlDelegate );
+
+            // Assert:
+            String expected = expectedBuilder.ToString();
+            String actual = result.ToString();
+            Assert.AreEqual( expected, actual );
+        }
+
+        private static string buildPageUrl( int i )
+        {
+            return string.Format( "pageIndex={0}", i );
         }
     }
 }
