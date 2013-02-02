@@ -27,7 +27,7 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
                 Products = _productRepository.Products.OrderBy( p => p.ProductID )
                              .Skip( ( pageIndex - 1 ) * ItemSizePerPage )
                              .Take( ItemSizePerPage ),
-                PagingInfo = new PagingInfo{CurrentPageIndex = pageIndex, ItemsPerPage = ItemSizePerPage}
+                PagingInfo = new PagingInfo{CurrentPageIndex = pageIndex, ItemsPerPage = ItemSizePerPage, TotalItems = _productRepository.Products.Count()}
             };
             return View( productListViewModel );
         }
