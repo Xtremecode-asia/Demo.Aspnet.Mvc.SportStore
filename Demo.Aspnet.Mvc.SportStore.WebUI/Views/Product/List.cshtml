@@ -1,15 +1,18 @@
-﻿@model IEnumerable<Demo.Aspnet.Mvc.SportStore.Domain.Entities.Product>
+﻿@*@model IEnumerable<Demo.Aspnet.Mvc.SportStore.Domain.Entities.Product>*@
+@model Demo.Aspnet.Mvc.SportStore.WebUI.ViewModels.ProductListViewModel
 
 @{
     ViewBag.Title = "List";
 }
 
-@foreach(var product in Model)
+@foreach( var product in Model.Products )
 {
     <div class="item">
         <h3>@product.Name</h3>
         @product.Description
-        <h4>@product.Price.ToString("c")</h4>
-        <hr/>
+        <h4>@product.Price.ToString( "c" )</h4>
+        <hr />
     </div>
+    
+    <div class="pager">@Html.PageLinks( Model.PagingInfo, x => Url.Action( "List", new { pageIndex = x } ) )</div>
 }

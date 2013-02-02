@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 
 using Demo.Aspnet.Mvc.SportStore.Domain.Abstract;
+using Demo.Aspnet.Mvc.SportStore.WebUI.Models;
+using Demo.Aspnet.Mvc.SportStore.WebUI.ViewModels;
 
 namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
 {
@@ -20,9 +22,14 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
 
         public ViewResult List(int pageIndex = 1)
         {
-            return View( _productRepository.Products.OrderBy(p=>p.ProductID)
-                                                    .Skip((pageIndex-1)*ItemSizePerPage)
-                                                    .Take(ItemSizePerPage));
+            ProductListViewModel productListViewModel = new ProductListViewModel
+            {
+                Products = _productRepository.Products.OrderBy( p => p.ProductID )
+                             .Skip( ( pageIndex - 1 ) * ItemSizePerPage )
+                             .Take( ItemSizePerPage ),
+                PagingInfo = new PagingInfo{CurrentPageIndex = pageIndex, ItemsPerPage = ItemSizePerPage}
+            };
+            return View( productListViewModel );
         }
 
     }

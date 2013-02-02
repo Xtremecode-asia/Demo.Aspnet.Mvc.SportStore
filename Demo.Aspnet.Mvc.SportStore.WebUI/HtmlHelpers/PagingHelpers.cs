@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using System.Web.Mvc;
+
 using Demo.Aspnet.Mvc.SportStore.WebUI.Models;
 
 namespace Demo.Aspnet.Mvc.SportStore.WebUI.HtmlHelpers
@@ -26,7 +28,7 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.HtmlHelpers
                 // Build a page index's link
                 TagBuilder anchorTagBuilder = new TagBuilder( "a" );
                 anchorTagBuilder.MergeAttribute( "href", pageUrl( i ) );
-                anchorTagBuilder.InnerHtml = string.Format( "{0}_", i.ToString() );
+                anchorTagBuilder.InnerHtml = string.Format( "{0}_", i.ToString(CultureInfo.InvariantCulture) );
                 // Define current page index's style
                 if( i == pagingInfo.CurrentPageIndex )
                 {

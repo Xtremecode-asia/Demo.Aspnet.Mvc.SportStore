@@ -52,15 +52,16 @@ namespace Demo.Aspnet.Mvc.SportStore.UnitTests
             Assert.AreEqual( "P6", actual[ 1 ].Name );
         }
 
+        [TestMethod]
         public void Can_Generate_Page_Links()
         {
             // Arrange - Define HtmlHelper, at the moment we'd just instantiate it from current default type which takes null params on its contructor args
-            HtmlHelper htmlHelper = new HtmlHelper( null, null );
+            HtmlHelper htmlHelper = null;
 
             // Arrange - Expected result
             StringBuilder expectedBuilder = new StringBuilder();
-            expectedBuilder.Append( string.Format( "<a class=\"{0}\" href=\"{1}\">{2}</a>", "selected", buildPageUrl( 1 ), 1 ) );
-            expectedBuilder.Append( string.Format( "<a href=\"{0}\">{1}</a>", buildPageUrl( 2 ), 2 ) );
+            expectedBuilder.Append( string.Format( "<a class=\"{0}\" href=\"{1}\">{2}</a>", "selected", buildPageUrl( 1 ), 1 + "_" ) );
+            expectedBuilder.Append( string.Format( "<a href=\"{0}\">{1}</a>", buildPageUrl( 2 ), 2 + "_" ) );
 
             // Arrange - Create paging info 
             PagingInfo pagingInfo = new PagingInfo { CurrentPageIndex = 1, ItemsPerPage = 2, TotalItems = 4 };
