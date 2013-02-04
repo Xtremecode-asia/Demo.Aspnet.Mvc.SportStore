@@ -7,13 +7,7 @@
 
 @foreach( var product in Model.Products )
 {
-    <div class="item">
-        <h3>@product.Name</h3>
-        @product.Description
-        <h4>@product.Price.ToString( "c" )</h4>
-        <hr />
-    </div>
+    Html.RenderPartial("ProductSummary", product);
 }
 
-<hr/>
 <div class="pager">@Html.PageLinks( Model.PagingInfo, x => Url.Action( "List", new { pageIndex = x } ) )</div>

@@ -9,6 +9,7 @@ using Demo.Aspnet.Mvc.SportStore.Domain.Entities;
 using Demo.Aspnet.Mvc.SportStore.WebUI.Controllers;
 using Demo.Aspnet.Mvc.SportStore.WebUI.HtmlHelpers;
 using Demo.Aspnet.Mvc.SportStore.WebUI.Models;
+using Demo.Aspnet.Mvc.SportStore.WebUI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -41,7 +42,9 @@ namespace Demo.Aspnet.Mvc.SportStore.UnitTests
 
             // Act: Calls the Product Controller's List method 
             const int page = 2;
-            IEnumerable<Product> productsInPage = (IEnumerable<Product>)productController.List( page ).Model;
+            ProductListViewModel productListViewModel = (productController.List(page).Model as ProductListViewModel);
+            Assert.IsNotNull(productListViewModel);
+            IEnumerable<Product> productsInPage = productListViewModel.Products;
 
             // Assert
             Product[] actual = productsInPage.ToArray();
@@ -60,8 +63,8 @@ namespace Demo.Aspnet.Mvc.SportStore.UnitTests
 
             // Arrange - Expected result
             StringBuilder expectedBuilder = new StringBuilder();
-            expectedBuilder.Append( string.Format( "<a class=\"{0}\" href=\"{1}\">{2}</a>", "selected", buildPageUrl( 1 ), 1 + "_" ) );
-            expectedBuilder.Append( string.Format( "<a href=\"{0}\">{1}</a>", buildPageUrl( 2 ), 2 + "_" ) );
+            expectedBuilder.Append( string.Format( "<a class=\"{0}\" href=\"{1}\">{2}</a>", "selected", buildPageUrl( 1 ), 1 ) );
+            expectedBuilder.Append( string.Format( "<a href=\"{0}\">{1}</a>", buildPageUrl( 2 ), 2 ) );
 
             // Arrange - Create paging info 
             PagingInfo pagingInfo = new PagingInfo { CurrentPageIndex = 1, ItemsPerPage = 2, TotalItems = 4 };
