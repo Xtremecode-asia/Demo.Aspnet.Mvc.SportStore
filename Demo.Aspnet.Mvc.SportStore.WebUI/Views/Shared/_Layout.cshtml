@@ -12,7 +12,8 @@
     <div id="header">
         <div class="title">Sport Store, Inc.</div>
     </div>
-    <div id="categories">TODO: Put item categories in here</div>
+    @*<div id="categories">TODO: Put item categories in here</div>*@
+    <div id="categories">@{ Html.RenderAction("Menu", "Nav"); }</div>
     <div id="content">@RenderBody()</div>
     
     @*@RenderBody()

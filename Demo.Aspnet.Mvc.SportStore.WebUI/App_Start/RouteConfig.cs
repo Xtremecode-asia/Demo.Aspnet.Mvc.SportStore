@@ -9,17 +9,34 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI
         {
             routes.IgnoreRoute( "{resource}.axd/{*pathInfo}" );
 
-            routes.MapRoute(
-                name:null,
-                url: "Page{pageIndex}",
-                defaults: new {Controller= "Product", action="List"}
-            );
+            // Url: / 
+            routes.MapRoute( null, string.Empty, new 
+                {
+                    controller = "Product", action ="List", category = null as string, pageIndex = 1
+                });
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
-            );
+            // Url: /Page2
+            routes.MapRoute(null, "Page{pageIndex}", new
+                {
+                    controller= "Product", action="List", category= null as string, pageIndex = @"\d+" 
+                });
+
+            // Url: /Soccer
+            routes.MapRoute(null, "{category}", new
+                {
+                    controller = "Product", action="List", pageIndex = 1
+                });
+
+            // Url: /Soccer/Page2
+            routes.MapRoute(null, "{category}/Page{pageIndex}", new
+            {
+                controller = "Product",
+                action = "List",
+                pageIndex = @"\d+"
+            });
+            
+            // Url: /Anything/Else
+            routes.MapRoute(null, "{controller}/{action}");
         }
     }
 }

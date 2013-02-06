@@ -82,3 +82,13 @@ div.pager a { font-size: 1.1em; color: #666; text-decoration: none;
       padding: 0 .4em 0 .4em; }
 div.pager a:hover { background-color: silver; }
 div.pager a.selected { background-color: #353535; color: white; }
+
+div#categories a {
+    font: bold 1.1em "Arial Narrow","Franklin Gothic Medium",Arial; 
+    display: block; /*This would layout the items as a stacked items*/
+    text-decoration: none; padding: .6em; color: Black;
+    border-bottom: 1px solid silver;
+}
+div#categories A.selected { background-color: #666; color: White; }
+div#categories A:hover { background-color: #CCC; }
+div#categories A.selected:hover { background-color: #666; }

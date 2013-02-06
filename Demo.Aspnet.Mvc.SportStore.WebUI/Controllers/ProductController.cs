@@ -20,14 +20,17 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
         //
         // GET: /Product/List
 
-        public ViewResult List(int pageIndex = 1)
+        public ViewResult List(string category, int pageIndex = 1)
         {
             ProductListViewModel productListViewModel = new ProductListViewModel
             {
                 Products = _productRepository.Products.OrderBy( p => p.ProductID )
+                             .Where(p=> category == null || p.Category == category )
                              .Skip( ( pageIndex - 1 ) * ItemSizePerPage )
                              .Take( ItemSizePerPage ),
-                PagingInfo = new PagingInfo{CurrentPageIndex = pageIndex, ItemsPerPage = ItemSizePerPage, TotalItems = _productRepository.Products.Count()}
+                PagingInfo = new PagingInfo{CurrentPageIndex = pageIndex, ItemsPerPage = ItemSizePerPage, 
+                                            TotalItems = string.IsNullOrWhiteSpace(category) ? _productRepository.Products.Count() : _productRepository.Products.Count(p => p.Category == category) },
+                CurrentCategory = category
             };
             return View( productListViewModel );
         }
