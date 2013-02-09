@@ -24,7 +24,8 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
         {
             ProductListViewModel productListViewModel = new ProductListViewModel
             {
-                Products = _productRepository.Products.OrderBy( p => p.ProductID )
+                Products = _productRepository.Products
+                             .OrderBy( p => p.ProductID )
                              .Where(p=> category == null || p.Category == category )
                              .Skip( ( pageIndex - 1 ) * ItemSizePerPage )
                              .Take( ItemSizePerPage ),

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 using Demo.Aspnet.Mvc.SportStore.Domain.Abstract;
 
@@ -20,8 +18,7 @@ namespace Demo.Aspnet.Mvc.SportStore.WebUI.Controllers
         public PartialViewResult Menu(string category = null)
         {
             ViewBag.SelectedCategory = category;
-            IEnumerable<string> categories = _productRepository.Products.Select(p => p.Category).Distinct().OrderBy(p => p);
-            return PartialView(categories);
+            return PartialView(_productRepository.FindAllProductCategories());
         }
 
     }

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="ProductSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CartSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
