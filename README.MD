@@ -10,6 +10,13 @@ I. Covered aspects in Chapter 7:
 - CSS Styling.
 - Reusing html element using Partial View.
 
+II. Covered aspects in Chapter 8:
+---------------------------------
+- More advanced Routing
+- ViewBag
+- @Html.RouteLink
+- Render a Partial View using Html.RenderAction
 TODO:
 -----
-- Moving to chapter 8,9,10 & 11.
+- Remaining aspects in chapter 8
+- Moving to chapter 9,10 & 11.
