@@ -115,13 +115,7 @@ namespace Demo.Aspnet.Mvc.SportStore.UnitTests
         {
             // Arrange - create mocked Product repository
             Mock<IProductRepository> mockedProductRepository = new Mock<IProductRepository>();
-            mockedProductRepository.Setup(m => m.Products).Returns(new[]
-                {
-                    new Product{ProductID = 1, Name = "P1", Category = "C1"},
-                    new Product{ProductID = 1, Name = "P2", Category = "C1"},
-                    new Product{ProductID = 1, Name = "P3", Category = "C2"},
-                    new Product{ProductID = 1, Name = "P4", Category = "C3"}
-                }.AsQueryable());
+            mockedProductRepository.Setup(m => m.FindAllProductCategories()).Returns(new[] { "C1", "C2", "C3" }.AsQueryable());
 
             // Arrange - Create the controller
             NavController navController = new NavController(mockedProductRepository.Object);
